@@ -41,19 +41,28 @@ public class MUtil {
 	
 	public void goAction(WebDriver driver, WebElement element,String name) throws InterruptedException {
 		
-		
-//		WebElement la=driver.findElement(By.className("toLoading"));
-//		String stage2=la.getAttribute("style");	
-//		System.out.println(stage2);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("toLoading")));
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("toLoading")));
 		
+		//这个用来选择PC端数据
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-value='pc']")));
+		WebElement pc = driver.findElement(By.xpath("//li[@data-value='pc']"));
+		String pcstage = pc.getAttribute("class");
+		while (!pcstage.equals("active")) {
+			pc.click();
+			pcstage = pc.getAttribute("class");
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("toLoading")));
+		}
+		
+		//选择平均数
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("trend-meanline")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("toLoading")));
 		WebElement sb=driver.findElement(By.id("trend-meanline"));
-		String stage=sb.getAttribute("class");	
-		while(!stage.equals("select")){
+		String sbstage=sb.getAttribute("class");	
+		while(!sbstage.equals("select")){
 			sb.click();
-			stage=sb.getAttribute("class");
+			sbstage=sb.getAttribute("class");
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("toLoading")));
 		}
 		Actions action = new Actions(driver);
 		action.moveToElement(element, 52, 330).perform();		
@@ -66,13 +75,10 @@ public class MUtil {
 		Thread.sleep(1000);
 		
 		if((tbv.getLocation().getX())!=0 && (tbv.getLocation().getY())!=0 ){
-			createElementImage(driver, tbv, "./result_pic/"+name+".png");
+			createElementImage(driver, tbv, name+".png");
 		}
 	}
-	
-	
-	
-	
+		
 	
 	/**
 	 * 获取trend标签框架并且移动到该标签

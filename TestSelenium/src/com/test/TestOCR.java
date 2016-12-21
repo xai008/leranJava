@@ -8,5 +8,6 @@ public class TestOCR {
 		new DaoOCR().recognizeMission("result_pic");
 //		DateList dlist = new DateList();
 //		dlist.getmissdate(doneDate.get(0), doneDate.get(doneDate.size()-1), doneDate);
+		System.out.println("Mission completed");
 	}
 }
