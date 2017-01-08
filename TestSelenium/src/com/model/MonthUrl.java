@@ -14,7 +14,12 @@ public class MonthUrl {
 	private String starttime;
 	private String endtime;
 	private String word;
+	private int day;
 	
+	public int getDay() {
+		return day;
+	}
+
 	public MonthUrl(String tpye, String area, int year, int month, String word) {		
 		this.tpye = tpye;
 		this.area = area;
@@ -26,6 +31,8 @@ public class MonthUrl {
 		this.starttime=df.format(calendar.getTime());
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 		this.endtime=df.format(calendar.getTime());
+		this.day=calendar.getActualMaximum(Calendar.DATE);
+		
 	}
 
 	public String getURL() {
