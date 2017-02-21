@@ -26,7 +26,8 @@ public class DaoOCR {
 		cmd.add(outputFile.getName());
 		cmd.add(LANG_OPTION);
 		cmd.add("eng");
-		cmd.add("-psm 3");
+		cmd.add("-psm");
+		cmd.add("6");//默认是3
 		cmd.add("digits");// 限制匹配的时候用
 		ProcessBuilder pb = new ProcessBuilder();
 		pb.directory(imageFile.getParentFile()); // 设置工作目录

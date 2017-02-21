@@ -33,6 +33,10 @@ public class MonthUrl {
 		this.endtime=df.format(calendar.getTime());
 		this.day=calendar.getActualMaximum(Calendar.DATE);
 		
+		//移动了一下为了消除不存在
+//		calendar.add(Calendar.DATE,3);
+//		this.endtime=df.format(calendar.getTime());
+//		this.day+=3;		
 	}
 
 	public String getURL() {

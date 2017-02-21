@@ -86,11 +86,18 @@ public class MUtil {
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("toLoading")));
 		}
 		Actions action = new Actions(driver);
-		action.moveToElement(element, 52, 330).perform();
+		action.moveToElement(element, 52, 350).perform();
 		WebElement tbv = driver.findElement(By.id("trendBarVal"));
 		while (!tbv.isDisplayed()) {
-			int b = (random.nextInt(10)) * 5 + 330;
-			action.moveToElement(element, 52, b).perform();
+//			int b = (random.nextInt(10)) * 2 + 330;
+//			int a = (random.nextInt(10)) * 2 + 52;
+//			action.moveToElement(element,a, b).perform();
+			for(int b=320;b<351;b++){
+				action.moveToElement(element,52, b).perform();
+			}
+//			System.out.println(a);
+//			System.out.println(b);
+			
 		}
 		Thread.sleep(1000);
 
@@ -131,6 +138,7 @@ public class MUtil {
 			Thread.sleep(500);
 			action.moveToElement(element, (int) (xOffset + (random.nextInt(20)) * movewidth), yOffset).perform();
 		}
+		
 
 		while (xOffset < size.getWidth()) {
 			action.moveToElement(element, (int) xOffset, yOffset).perform();
@@ -141,11 +149,19 @@ public class MUtil {
 				while(!viewele.isDisplayed()){
 					action.moveToElement(element, (int) (size.getWidth() /(random.nextInt(6)+1)), yOffset).perform();
 					Thread.sleep(500);
-					action.moveToElement(element, (int) xOffset, yOffset).perform();
+					action.moveToElement(element, (int) xOffset, yOffset).perform();				
 				}
-				Thread.sleep(500);
+				Thread.sleep(800);
 				if ((viewele.getLocation().getX()) != 0 && (viewele.getLocation().getY()) != 0) {
 					createElementImage(driver, viewetd, "./result_pic/" + name + String.valueOf(dayid) + ".png");
+				}else{
+					action.moveToElement(element, (int) xOffset, yOffset+random.nextInt(6)+5).perform();
+					Thread.sleep(500);
+					((JavascriptExecutor) driver).executeScript("arguments[0].style.display='block';", viewele);
+					Thread.sleep(800);
+					if ((viewele.getLocation().getX()) != 0 && (viewele.getLocation().getY()) != 0) {
+						createElementImage(driver, viewetd, "./result_pic/" + name + String.valueOf(dayid) + ".png");
+					}
 				}
 				xOffset = xOffset + movewidth;
 			} catch (Exception e) {

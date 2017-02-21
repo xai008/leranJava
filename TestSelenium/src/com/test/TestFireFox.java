@@ -12,8 +12,8 @@ import com.model.MonthUrl;
 public class TestFireFox {
 
 	public static void main(String[] args) throws InterruptedException {
-		 Month();
-//		Day();
+//		 Month();
+		Day();
 	}
 
 	public static void Day() throws InterruptedException {
@@ -33,7 +33,7 @@ public class TestFireFox {
 
 		Thread.sleep(400);
 		
-		String targetN ="澳门住宿,澳门酒店,澳门酒店预订,澳门,澳门赌场,澳门攻略,澳门特产";
+		String targetN ="澳门旅游塔";
 		String[] tn = targetN.split(",");
 		for (String tName : tn) {
 			System.out.println(tName);
@@ -55,9 +55,9 @@ public class TestFireFox {
 		MUtil mUtil = new MUtil();
 		// 记得更换firefox的配置与位置
 		System.setProperty("webdriver.firefox.marionette", "E:/0javatest/driver/geckodriver.exe");
-		System.setProperty("webdriver.firefox.bin", "D:/Program Files/Mozilla Firefox/firefox.exe");
+		System.setProperty("webdriver.firefox.bin", "D:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 
-		File profileDir = new File("C:/Users/Administrator/AppData/Roaming/Mozilla/Firefox/Profiles/lxn0j4mo.default");
+		File profileDir = new File("C:/Users/Administrator/AppData/Roaming/Mozilla/Firefox/Profiles/6js1doen.default");
 		FirefoxProfile profile = new FirefoxProfile(profileDir);
 		WebDriver driver = new FirefoxDriver(profile);
 
@@ -68,14 +68,14 @@ public class TestFireFox {
 
 		Thread.sleep(400);
 
-		String targetN = "澳门旅游塔";
+		String targetN = "澳门赌场,澳门赌场玩法,澳门酒店";
 		String[] tn = targetN.split(",");
 		for (String tName : tn) {
 			System.out.println(tName);
-			for (int a = 2011; a < 2016; a++) {
+			for (int a = 2011; a < 2017; a++) {
 				System.out.println(a);
 				for (int i = 1; i < 13; i++) {
-					MonthUrl murl = new MonthUrl("1", "0", a, i, tName);
+					MonthUrl murl = new MonthUrl("0", "911", a, i, tName);
 					System.out.println(murl.getURL());
 					mUtil.begin(driver, murl.getURL(), "./result_pic/" + tName + "-" + a + "-" + i);
 				}
